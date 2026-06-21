@@ -8,7 +8,7 @@
         <ul class="actions pagination">
             <li>
                 <a href="" @click.prevent="getPost(page-1)" :class="{disabled: page === 1}" class="button big previous"
-                    >Previous Page</a
+                    >Previous Page </a
                 >
             </li>
             <li><a href="#" @click.prevent="getPost(page+1)" :class="{disabled: posts.current_page===posts.last_page}" class="button big next">Next Page</a></li>
