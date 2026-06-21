@@ -1,7 +1,11 @@
-<!-- resources/js/pages/HomePage.vue -->
 <template>
     <div id="main">
-        <!-- Список статей -->
+        <h1>Мои статьи</h1>
+        
+        <div v-if="articles.data && articles.data.length === 0">
+            <p>У вас пока нет статей. <a href="#" @click="changePage('AddArticle')">Создать</a></p>
+        </div>
+        
         <ArticleComponent 
             v-for="article in articles.data" 
             :key="article.id"
@@ -10,7 +14,6 @@
             :PUBLIC="PUBLIC"
         />
 
-        <!-- Пагинация -->
         <ul class="actions pagination">
             <li>
                 <a href="#" @click.prevent="getArticles(page - 1)" 
@@ -34,7 +37,7 @@
 import ArticleComponent from '../components/ArticleComponent.vue';
 
 export default {
-    name: 'HomePage',
+    name: 'MyArticles',
     props: ['datasend', 'changePage', 'PUBLIC'],
     components: {
         ArticleComponent,
@@ -50,7 +53,7 @@ export default {
     },
     methods: {
         getArticles(page = 1) {
-            this.datasend('public/articles?page=' + page)
+            this.datasend('articles?page=' + page)
                 .then((result) => {
                     this.articles = result;
                     this.page = result.current_page;

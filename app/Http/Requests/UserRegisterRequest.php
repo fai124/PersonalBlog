@@ -9,10 +9,10 @@ class UserRegisterRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    //public function authorize(): bool
-    //{
-      //  return false;
-    //}
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,9 +22,8 @@ class UserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "username"=>"required|unique:users",
-            "fullname"=>"required|min:3",
-            "avatar"=>"required|image",
+            "name"=>"required|unique:users",
+            "email"=>"required|min:3",
             "password"=>"required",
         ];
     }

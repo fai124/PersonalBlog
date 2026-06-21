@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -21,9 +22,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'username',
-        'fullname',
-        'role',
-        'avatar',
+        'email',
         'password',
     ];
 
@@ -51,5 +50,9 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
     }
 }
