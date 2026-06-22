@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "983cd8ecdcf21f9125a96a8a4c755ad4",
+    "content-hash": "fd6b95892b0c367bc953ccbfdafec9f6",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -1226,6 +1226,65 @@
                 "source": "https://github.com/inertiajs/inertia-laravel/tree/v2.0.20"
             },
             "time": "2026-02-13T11:53:06+00:00"
+        },
+        {
+            "name": "kerigard/laravel-lang-ru",
+            "version": "v2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kerigard/laravel-lang-ru.git",
+                "reference": "39ab44f4a94188dfcd5fb1941ed1008b67440ef1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Kerigard/laravel-lang-ru/zipball/39ab44f4a94188dfcd5fb1941ed1008b67440ef1",
+                "reference": "39ab44f4a94188dfcd5fb1941ed1008b67440ef1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/http": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "illuminate/translation": "^11.0|^12.0|^13.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^9.0|^10.0|^11.0",
+                "phpunit/phpunit": "^10.0|^11.0|^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Kerigard\\LaravelLangRu\\LangRuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Kerigard\\LaravelLangRu\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladislav Sidelnikov",
+                    "email": "kerihoros@gmail.com"
+                }
+            ],
+            "description": "Ru lang for Laravel",
+            "homepage": "https://github.com/kerigard/laravel-lang-ru",
+            "keywords": [
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/Kerigard/laravel-lang-ru/issues",
+                "source": "https://github.com/Kerigard/laravel-lang-ru/tree/v2.1.1"
+            },
+            "time": "2026-03-17T15:16:44+00:00"
         },
         {
             "name": "laravel/fortify",

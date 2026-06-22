@@ -24,7 +24,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function auth(UserAuthRequest $request)
+    public function login(UserAuthRequest $request)
     {
         $user = User::where('email', $request->email)->first();
         
@@ -47,11 +47,5 @@ class UserController extends Controller
     {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'ok']);
-    }
-    
-
-    public function user(Request $request)
-    {
-        return response()->json($request->user());
     }
 }

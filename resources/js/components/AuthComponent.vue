@@ -33,7 +33,7 @@ export default {
             if (this.email) formdata.append('email', this.email);
             if (this.password) formdata.append('password', this.password);
 
-            this.datasend('auth', 'POST', formdata)
+            this.datasend('login', 'POST', formdata)
                 .then((result) => {
                     console.log(result);
                     if (result.errors) {

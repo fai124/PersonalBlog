@@ -13,22 +13,52 @@
             :changeToken="changeToken"
             :changePage="changePage"
         />
-        
-        <!-- Страницы -->
-        <HomePage v-if="page == 'HomePage'" 
-            :datasend="datasend" 
-            :changePage="changePage" 
-            :pageId="pageId" 
+
+        <HomePage
+            v-if="page == 'HomePage'"
+            :datasend="datasend"
+            :changePage="changePage"
+            :pageId="pageId"
             :PUBLIC="PUBLIC"
         />
+        <AddArticle
+            v-if="page == 'AddArticle'"
+            :datasend="datasend"
+            :changePage="changePage"
+            :pageId="pageId"
+        />
+
+        <SingleArticle
+            v-if="page == 'SingleArticle'"
+            :datasend="datasend"
+            :changePage="changePage"
+            :pageId="pageId"
+        />
+
+        <MyArticles
+            v-if="page == 'MyArticles'"
+            :datasend="datasend"
+            :changePage="changePage"
+            :PUBLIC="PUBLIC"
+        />
+        <UserArticles
+            v-if="page == 'UserArticles'"
+            :datasend="datasend"
+            :changePage="changePage"
+            :PUBLIC="PUBLIC"
+            :pageId="pageId"
+        />
     </div>
-    
 </template>
 
 <script>
 import MenuComponent from './components/MenuComponent.vue';
 import HeaderComponent from './components/HeaderComponent.vue';
 import HomePage from './pages/HomePage.vue';
+import AddArticle from './pages/AddArticle.vue';
+import SingleArticle from './pages/SingleArticle.vue';
+import MyArticles from './pages/MyArticles.vue';
+import UserArticles from './pages/UserArticles.vue';
 
 export default {
     name: 'App',
@@ -46,6 +76,10 @@ export default {
         MenuComponent,
         HeaderComponent,
         HomePage,
+        AddArticle,
+        SingleArticle,
+        MyArticles,
+        UserArticles,
     },
     mounted() {
         if (localStorage.getItem('token')) {
@@ -54,7 +88,7 @@ export default {
     },
     methods: {
         logout() {
-            this.datasend('logout')
+            this.datasend('logout' , 'POST')
                 .then((result) => {
                     if (result) {
                         localStorage.removeItem('token');
@@ -68,7 +102,6 @@ export default {
                     console.error(error);
                 });
         },
-        
 
         changePage(page, pageId = null) {
             this.page = page;
@@ -76,7 +109,6 @@ export default {
             localStorage.setItem('page', page);
             localStorage.setItem('pageId', pageId);
         },
-        
 
         getUser() {
             this.datasend('user')
@@ -89,16 +121,15 @@ export default {
                     localStorage.removeItem('token');
                 });
         },
-        
 
         datasend(route, method = 'GET', formdata = null) {
             let myHeaders = new Headers();
             myHeaders.append('Accept', 'application/json');
-            
+
             if (localStorage.getItem('token')) {
                 myHeaders.append(
                     'Authorization',
-                    'Bearer ' + localStorage.getItem('token')
+                    'Bearer ' + localStorage.getItem('token'),
                 );
             }
 
@@ -111,7 +142,7 @@ export default {
             if (method != 'GET') {
                 requestOptions.body = formdata;
             }
-            
+
             return fetch(this.API + route, requestOptions).then((response) => {
                 if (response.status == 401) {
                     localStorage.removeItem('token');
@@ -122,7 +153,6 @@ export default {
                 return response.json();
             });
         },
-        
 
         changeToken(token) {
             localStorage.setItem('token', token);

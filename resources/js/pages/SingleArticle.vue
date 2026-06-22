@@ -54,7 +54,7 @@ export default {
             });
         },
         getArticle() {
-            const url = this.isAuth ? 'articles/' + this.pageId : 'public/articles/' + this.pageId;
+            const url = this.isAuth ? 'articles/' + this.pageId : 'articleOne/' + this.pageId;
             this.datasend(url).then((result) => {
                 this.article = result.article;
                 this.isAuthor = result.isAuthor || false;
