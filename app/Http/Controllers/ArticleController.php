@@ -42,8 +42,6 @@ class ArticleController extends Controller
     
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        Log::info('Update request data:', $request->all());
-
         if (Auth::id() !== $article->user_id) {
             return response()->json(['message' => 'Нет прав'], 403);
         }

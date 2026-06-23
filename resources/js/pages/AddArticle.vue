@@ -2,9 +2,7 @@
     <div id="main">
         <article class="post">
             <h1>
-                {{
-                    pageId && pageId !== 'null' ? 'Редактировать' : 'Создать'
-                }}
+                {{ pageId && pageId !== 'null' ? 'Редактировать' : 'Создать' }}
                 статью
             </h1>
 
@@ -57,27 +55,23 @@ export default {
                 });
         },
         saveArticle() {
-    let formdata = new FormData();
-    formdata.append('title', this.title || '');
-    formdata.append('content', this.content || '');
-    if (this.pageId && this.pageId !== 'null') {
-        formdata.append('_method', 'PUT');
-    }
+            let formdata = new FormData();
+            formdata.append('title', this.title || '');
+            formdata.append('content', this.content || '');
 
-    const url = (this.pageId && this.pageId !== 'null')
-        ? 'articles/' + this.pageId
-        : 'articles';
+            const isEdit = this.pageId && this.pageId !== 'null';
+            const url = isEdit
+                ? 'articles/' + this.pageId + '/update'
+                : 'articles';
 
-    this.datasend(url, 'POST', formdata) 
-        .then((result) => {
-            if (result.errors) {
-                this.errors = result.errors;
-            } else if (result.id) {
-                this.changePage('SingleArticle', result.id);
-            }
-        })
-        
-},
+            this.datasend(url, 'POST', formdata).then((result) => {
+                if (result.errors) {
+                    this.errors = result.errors;
+                } else if (result.id) {
+                    this.changePage('SingleArticle', result.id);
+                }
+            });
+        },
     },
 };
 </script>
