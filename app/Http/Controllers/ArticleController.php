@@ -13,7 +13,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Auth::user()->articles()->with('user')->latest()->get();
+        $articles = Auth::user()->articles()->with('user')->get();
         return response()->json($articles);
     }
     
@@ -30,21 +30,14 @@ class ArticleController extends Controller
     public function show($id)
     {
         $article = Article::with('user')->findOrFail($id);
-        $isAuthor = false;
         if (Auth::check()) {
             $isAuthor = Auth::id() === $article->user_id;
         }
-        return response()->json([
-            'article' => $article,
-            'isAuthor' => $isAuthor
-        ]);
+        return response()->json(['article' => $article,'isAuthor' => $isAuthor]);
     }
     
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        if (Auth::id() !== $article->user_id) {
-            return response()->json(['message' => 'Нет прав'], 403);
-        }
         $article->title = $request->title;
         $article->content = $request->content;
         $article->save();
@@ -61,7 +54,7 @@ class ArticleController extends Controller
 
     public function article()
     {
-        $articles = Article::with('user')->latest()->get();
+        $articles = Article::with('user')->get();
         return response()->json($articles);
     }
     
@@ -74,7 +67,7 @@ class ArticleController extends Controller
     public function articleUser($user)
     {
         $user = User::findOrFail($user);
-        $articles = $user->articles()->with('user')->latest()->get();
+        $articles = $user->articles()->with('user')->get();
         return response()->json($articles);
     }
 }
