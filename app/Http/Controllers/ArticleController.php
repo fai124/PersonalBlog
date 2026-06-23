@@ -13,7 +13,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Auth::user()->articles()->with('user')->latest()->paginate(10);
+        $articles = Auth::user()->articles()->with('user')->latest()->get();
         return response()->json($articles);
     }
     
@@ -61,7 +61,7 @@ class ArticleController extends Controller
 
     public function article()
     {
-        $articles = Article::with('user')->latest()->paginate(10);
+        $articles = Article::with('user')->latest()->get();
         return response()->json($articles);
     }
     
@@ -74,7 +74,7 @@ class ArticleController extends Controller
     public function articleUser($user)
     {
         $user = User::findOrFail($user);
-        $articles = $user->articles()->with('user')->latest()->paginate(10);
+        $articles = $user->articles()->with('user')->latest()->get();
         return response()->json($articles);
     }
 }

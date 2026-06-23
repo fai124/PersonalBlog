@@ -1,38 +1,12 @@
 <template>
     <div id="main">
-
         <ArticleComponent
-            v-for="article in articles.data"
+            v-for="article in articles"
             :key="article.id"
             :article="article"
             :changePage="changePage"
             :PUBLIC="PUBLIC"
         />
-
-        <ul class="actions pagination">
-            <li>
-                <a
-                    href="#"
-                    @click.prevent="getArticles(page - 1)"
-                    :class="{ disabled: page === 1 }"
-                    class="button big previous"
-                >
-                    Предыдущая
-                </a>
-            </li>
-            <li>
-                <a
-                    href="#"
-                    @click.prevent="getArticles(page + 1)"
-                    :class="{
-                        disabled: articles.current_page === articles.last_page,
-                    }"
-                    class="button big next"
-                >
-                    Следующая
-                </a>
-            </li>
-        </ul>
     </div>
 </template>
 
@@ -47,19 +21,17 @@ export default {
     },
     data() {
         return {
-            articles: [],
-            page: 1,
+            articles: [], // теперь массив
         };
     },
     mounted() {
         this.getArticles();
     },
     methods: {
-        getArticles(page = 1) {
-            this.datasend('article?page=' + page)
+        getArticles() {
+            this.datasend('article')
                 .then((result) => {
-                    this.articles = result;
-                    this.page = result.current_page;
+                    this.articles = result; // result — массив
                 });
         },
     },
