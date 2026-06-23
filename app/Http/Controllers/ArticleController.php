@@ -51,11 +51,9 @@ class ArticleController extends Controller
         return response()->json(['id' => $article->id]);
     }
     
-    public function destroy(Article $article)
+    public function destroy($id)
     {
-        if (Auth::id() !== $article->user_id) {
-            return response()->json(['message' => 'Нет прав'], 403);
-        }
+        $article = Article::findOrFail($id);
         $article->delete();
         return response()->json(['message' => 'ok']);
     }
